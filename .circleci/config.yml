@@ -69,8 +69,11 @@ workflows:
           type: approval # <<< このキーを使うと Workflow を「待機」状態にします
           requires: # test2 が完了すると hold ジョブに処理が移ります
            - test
+      - slack/approval-notification:
+          message: Pending approval
+          webhook: ${slack_webhook}
       - notification:
           context: Slack
           requires:
-            - hold
+            - test
 
