@@ -48,7 +48,7 @@ jobs:
       - ruby/rspec-test
   notification:
     docker:
-      - image: cimg/base
+      - image: cimg/base:stable
     steps:
       - slack/notify:
           channel: ${slack_channel_id}
