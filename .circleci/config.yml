@@ -32,7 +32,6 @@ jobs:
       PGUSER: circleci-demo-ruby
       PGPASSWORD: ""
       RAILS_ENV: test
-    context: Slack
     steps:
       - checkout
       - ruby/install-deps
@@ -60,6 +59,7 @@ workflows:
     jobs:
       - build
       - test:
+          context: Slack
           requires:
             - build
 
