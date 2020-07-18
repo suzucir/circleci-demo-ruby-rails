@@ -50,12 +50,12 @@ jobs:
       - slack/status:
           fail_only: true
           channel: ${slack_channel_id}
-          only_for_branches: only_for_branches
+          # only_for_branches: only_for_branches
           webhook: webhook
       - slack/notify:
           channel: ${slack_channel_id}
           color: '#42e2f4'
-          message: This is a custom message notification
+          message: "This is a custom message notification"
           webhook: webhook
           
 workflows:
