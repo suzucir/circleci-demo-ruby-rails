@@ -55,12 +55,6 @@ jobs:
           color: '#42e2f4'
           message: "ビルドが終わったよー"
           webhook: ${slack_webhook}
-      - run: exit 0
-      - slack/status:
-          fail_only: true
-          channel: ${slack_channel_id}
-          # only_for_branches: only_for_branches
-          webhook: ${slack_webhook}
           
 workflows:
   version: 2
