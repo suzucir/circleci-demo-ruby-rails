@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
-  slack: circleci/slack@3.4.2
 
 jobs:
   build:
@@ -47,15 +46,6 @@ jobs:
           command: bundle exec rails db:schema:load --trace
       # Run rspec in parallel
       - ruby/rspec-test
-  notification:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - slack/notify:
-          channel: ${slack_channel_id}
-          color: '#42e2f4'
-          message: "ビルドが終わったよー"
-          webhook: ${slack_webhook}
           
 workflows:
   version: 2
@@ -65,8 +55,3 @@ workflows:
       - test:
           requires:
             - build
-      - notification:
-          context: Slack
-          requires:
-            - test
-
