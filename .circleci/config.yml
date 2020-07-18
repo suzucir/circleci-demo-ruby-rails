@@ -47,6 +47,8 @@ jobs:
       # Run rspec in parallel
       - ruby/rspec-test
   notification:
+    docker:
+      - image: cimg/ruby:2.7-node
     steps:
       - slack/notify:
           channel: ${slack_channel_id}
