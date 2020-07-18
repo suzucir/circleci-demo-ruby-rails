@@ -46,10 +46,12 @@ jobs:
           command: bundle exec rails db:schema:load --trace
       # Run rspec in parallel
       - ruby/rspec-test
+  notification:
+    steps:
       - slack/notify:
           channel: ${slack_channel_id}
           color: '#42e2f4'
-          message: "This is a custom message notification"
+          message: "ビルドが終わったよー"
           webhook: ${slack_webhook}
       - run: exit 0
       - slack/status:
@@ -64,7 +66,10 @@ workflows:
     jobs:
       - build
       - test:
-          context: Slack
           requires:
             - build
+      - notification:
+          context: Slack
+          requires:
+            - test
 
