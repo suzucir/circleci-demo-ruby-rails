@@ -65,14 +65,13 @@ workflows:
       - test:
           requires:
             - build
-      #- hold: # <<< ジョブの続きを実行するには CircleCI の Web ページ上で手動で承認する必要があります。
-      #    type: approval # <<< このキーを使うと Workflow を「待機」状態にします
-      #    requires: # test2 が完了すると hold ジョブに処理が移ります
-      #     - test
       - slack/approval-notification:
           context: Slack
-          type: approval
           message: Reviewをお願いします。問題なければApproveをお願いします。
           webhook: ${slack_webhook}
-          requires: # test2 が完了すると hold ジョブに処理が移ります
+          requires: 
            - test
+      - hold: # <<< ジョブの続きを実行するには CircleCI の Web ページ上で手動で承認する必要があります。
+          type: approval # <<< このキーを使うと Workflow を「待機」状態にします
+          requires: # test2 が完了すると hold ジョブに処理が移ります
+           - slack/approval-notification
