@@ -71,12 +71,8 @@ workflows:
       #     - test
       - slack/approval-notification:
           context: Slack
-          message: Pending approval
+          type: approval
+          message: Reviewをお願いします。問題なければApproveをお願いします。
           webhook: ${slack_webhook}
           requires: # test2 が完了すると hold ジョブに処理が移ります
            - test
-      - notification:
-          context: Slack
-          requires:
-            - slack/approval-notification
-
